@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../../Bootstrap/css/bootstrap.min.css" >
+    <title>Formulaire</title>
+</head>
+
+<style>
+    body form{
+        margin: 3% 10% 0% 10%;
+    }
+    body h1{
+        font-family:cursive;
+        font-size: 50px;
+    }
+</style>
+
+
+<body style="background-image: url(../../bgimage.png);" class="text-light pt-5">
+    <h1 class="text-center"> Formulaire d’inscription pour notre site E-commerce </h1>
+        <form class="form-group pl-4 pr-5" id="Formulaire_form" >
+            <div>
+                <label for="nom">Nom : </label>
+                <input type="text" id="nom" placeholder="Votre Nom" class="form-control ">
+                
+            </div>
+
+            <div>
+                <label for="prenom">Prenom : </label>
+                <input type="text" id="prenom" placeholder="Votre Prenom" class="form-control ">
+                
+            </div>
+
+            <div>
+                <label for="adresse">Adresse : </label>
+                <input type="text" id="adresse" placeholder="Exemple : 20 Rue mohammed 5, Larache , Maroc" class="form-control ">
+            </div>
+
+            <div>
+                <label for="email_form">Email : </label>
+                <input type="email" id="email_form" placeholder="Exemple@gmail.com" class="form-control ">
+                <span class="error_form" id="email_error_message" ></span>
+            </div>
+
+            <div>
+                <label for="mdp_form">Mot de passe : </label>
+                <input type="password" id="mdp_form" class="form-control ">
+                <span class="error_form" id="mdp_error_message" ></span>
+            </div>
+
+            <div>
+                <label for="cmdp_form">Confirmer votre mot de passe : </label>
+                <input type="password" id="cmdp_form" class="form-control ">
+                <span class="error_form" id="cmdp_error_message" ></span>
+            </div>
+
+            <div>
+                <label for="tele_form">Téléphone : </label>
+                <input type="tel" id="tele_form" class="form-control " placeholder="+212 655555555">
+                <span class="error_form" id="tele_error_message" ></span>
+            </div>
+
+            <div>
+                <label for="civilite">Civilité : </label>
+                <input type="text" id="civilite" class="form-control ">
+                
+            </div>
+
+            <div>
+                <label for="pays">Pays : </label>
+                <input type="text" id="pays" class="form-control ">
+                
+            </div>
+            
+            <div class="pt-3">
+                <button type="submit" class="btn btn-info btn-lg">Login</button>
+            </div>
+
+        </form>
+</body>
+
+<script>
+
+    $(document).ready(function(){
+   
+        $(function(){
+
+            // On initialise des messages d'erreur comme hide()
+
+            $("#email_error_message").hide();
+            $("#mdp_error_message").hide();
+            $("#cmdp_error_message").hide();
+            $("#tele_error_message").hide();
+
+            var email_error=false;
+            var tele_error=false;
+            var mdp_error=false;
+            var cmdp_error=false;
+
+            var npacp_error=false; // une variable pour verifier si les champs : nom,prènom,adresse,civilite,pays sont vide .
+
+            $("#email_form").focusout(function(){
+                check_email();
+            });
+
+            $("#mdp_form").focusout(function(){
+                check_mdp();
+            });
+
+            $("#cmdp_form").focusout(function(){
+                check_cmdp();
+            });
+
+            $("#tele_form").focusout(function(){
+                check_tele();
+            });
+
+            //Partie de verification : 
+
+            function check_email(){
+                var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                var email=$("#email_form").val();
+
+                if(pattern.test(email) && email!==''){    // Si pattern.test(email)===true Et email n'est pas vide 
+                    $("#email_error_message").hide();
+                    return false;
+                }
+                else{
+                    $("#email_error_message").html("Error ! ");
+                    $("#email_error_message").show();
+                    $("#email_error_message").css("text-color","red");
+                    return true;
+                }
+             };
+
+            function check_mdp(){       // içi on teste si le nombre de caractere du mot de passe est supperieur a 8.
+                var mdp_length=$("#mdp_form").val().length;
+                
+                if(mdp_length<8){
+                    $("#mdp_error_message").html("Enter plus que 8 caractère ! ")
+                    $("#mdp_error_message").show();
+                    return true;
+                }
+
+                else{
+                    $("#mdp_error_message").hide();
+                    return false;
+                }
+            };
+
+            function check_cmdp(){      // on fait la comparaison entre le mdp et la confirmation du mdp . 
+                var mdp=$("#mdp_form").val();
+                var cmdp=$("#cmdp_form").val();
+
+                if(mdp!==cmdp){
+                    $("#cmdp_error_message").html("Pas le meme mot de passe !");
+                    $("#cmdp_error_message").show();
+                    return true;
+                }
+                else{
+                    $("#cmdp_error_message").hide();
+                    return false;
+                }
+            };
+            
+            function check_tele(){      // un regex du numero de téléphone .
+
+                var pattern=/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+                var tele=$("#tele_form").val();
+
+                if(pattern.test(tele) && tele!==''){
+                    $("#tele_error_message").hide;
+                    return false;
+                }
+                else{
+                    $("#tele_error_message").html("Entrez un numero correct ! ");
+                    $("#tele_error_message").show();
+                    return true;
+                }
+            };
+
+            /* On verifier si les champs : nom,prenom,adresse,civilite,pays sont vide : */
+            function check_npacp(){
+                var nom=$("#nom").val();
+                var prenom=$("#prenom").val();
+                var adresse=$("#adresse").val();
+                var civilite=$("#civilite").val();
+                var pays=$("#pays").val();
+
+                if(nom==='' || prenom==='' || adresse==='' || civilite==='' || pays==='')
+                    return true;
+                else 
+                    return false;
+            };
+            
+
+            //On va vérifier si il y'a un message d'erreur. si c'est le cas , on ne permettre pas l'utilisateur de s'enregistrer
+            $("#Formulaire_form").submit(function(){   
+
+                // On appelle les fonction de "check" pour qu'on avoir des nouvelles valeurs des variables d'erreurs : 
+                var email_error=check_email();
+                var mdp_error=check_mdp();
+                var cmdp_error=check_cmdp();
+                var tele_error=check_tele();
+                var npacp_error=check_npacp();
+                
+                if(email_error===false && mdp_error===false  && cmdp_error===false  && tele_error===false && npacp_error===false){
+                    alert("Génial. Inscription réussi"); 
+                    return true;
+                }
+                else{
+                    alert("veuillez vous remplire la formulaire correctement ! ");
+                    return false;
+                }
+            });
+        });
+    });
+</script>
+
+
+</html>

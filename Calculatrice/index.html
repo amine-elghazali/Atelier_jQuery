@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../../Bootstrap/css/bootstrap.min.css">
+    <script src="../../jquery-3.6.0.min.js"></script>
+    <title>Calculatrice</title>
+</head>
+
+<style>
+
+    p{
+        padding-top: 1%;
+        text-align: center;
+        font-size: 15px;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
+
+    *{
+        margin:0;
+        padding: 0;
+        font-size: 30px;
+    }
+
+
+    .calcu{
+        width: 420px;
+        margin: auto;
+        border: solid;
+        border-width: 1px;
+        border-radius: 8px;
+        background-color:whitesmoke;
+        box-shadow:5px 5px 10px grey;
+    }
+
+    .display_cal{
+        font-size: 50px;
+        width: 93%;
+        height: 75px;
+        border: solid;
+        border-width: 1px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        margin: auto;
+        margin-left: 3%;
+        margin-top: 5%;
+        box-shadow:5px 5px 10px grey;
+    }
+
+    input[type=button]{
+        width: 60px;
+        height: 55px;
+        margin: 10px;
+        border: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        background-color:white;
+        box-shadow:5px 5px 10px grey;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+    }
+
+</style>
+
+
+<body>
+<br>
+    <div class="calcu">
+        <p>Ma calculatrice simple caculatrice simple</p>
+        <p>____________________________________________</p>
+        <form style="font-family: 50px;">
+            <input class="display_cal" style="text-align: right;">
+        </form>
+
+        <table>
+            <tr>
+                <td><input type="button" value="7" onclick="insert(7)"></td>
+                <td><input type="button" value="8" onclick="insert(8)"></td>
+                <td><input type="button" value="9" onclick="insert(9)"></td>
+                <td><input type="button" value="CE" style="background-color:rgba(122, 139, 187, 0.692);" onclick="ce()"></td>
+                <td><input type="button" value="C" style="background-color:rgba(149, 158, 131, 0.788);" onclick="c()"></td>
+            </tr>
+
+            <tr>
+                <td><input type="button" value="4" onclick="insert(4)"></td>
+                <td><input type="button" value="5" onclick="insert(5)"></td>
+                <td><input type="button" value="6" onclick="insert(6)"></td>
+                <td><input type="button" value="/" onclick="insert('/')"></td>
+                <td><input type="button" class="btn" value="*" onclick="insert('*')"></td>
+            </tr>
+
+            <tr>
+                <td><input type="button" value="1" onclick="insert(1)"></td>
+                <td><input type="button" value="2" onclick="insert(2)"></td>
+                <td><input type="button" value="3" onclick="insert(3)"></td>
+                <td><input type="button" value="-" onclick="insert('-')"></td>
+                <td rowspan="2"><input type="button" style="height: 130px;background-color:rgb(209, 190, 190) ;" class="btn" value="+" onclick="insert('+')" ></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><input type="button" style="width: 145px;" class="btn" value="0" onclick="insert(0)"></td>
+                <td><input type="button" value="." onclick="insert('.')"></td>
+                <td><input type="button" value="=" style="background-color: greenyellow;" onclick="calculer()"></td>
+            </tr>
+
+        </table>
+
+    </div>
+</body>
+
+
+<script>
+    function insert(numero){
+        $('.display_cal').val($('.display_cal').val()+numero);
+    }
+
+    function calculer(){
+        var resultat = eval($('.display_cal').val());
+        $('.display_cal').val(resultat);
+    }
+
+    function c(){
+        $('.display_cal').val('');
+    }
+
+    function ce(){
+        value=$('.display_cal').val();
+        
+        $('.display_cal').val(value.substring(0,value.length-1));
+    }
+
+
+</script>
+
+
+
+
+</html>

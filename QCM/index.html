@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../Bootstrap/css/bootstrap.min.css">
+    <script src="../../jquery-3.6.0.min.js"></script>
+    <title>QCM</title>
+</head>
+
+<style>
+    #top{
+        text-align: center;
+        text-decoration: underline;
+    }
+
+
+    body {
+        padding-left: 8%;
+    }
+    
+</style>
+
+<div id="top" class="pt-4">
+    <header >
+        <h1>Bienvenue sur notre QCM </h1>
+    </header>
+</div>
+
+<body style="background-image: url(backgroundimagewhite.jpg);font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+
+                <form>
+
+                    <div>
+                        <h2>Question 1 :</h2>
+                        <p id="q1">Lequel des langages informatiques suivants est utilisé pour l’intelligence artificielle ? </p>
+                        <input type="radio" name="question1" id="Q-1.1"> <span id="r1">COBOL</span> <br>
+                        <input type="radio" name="question1" id="Q-1.2"> <span id="r2">PROLOG</span> <br>
+                        <input type="radio" name="question1" id="Q_1.3"> <span id="r3">FORTRAN</span> <br>
+                    </div>
+
+                <br>
+                    <div>
+                        <h2>Question 2 :</h2>
+                        <p id="q2">Le cerveau de tout système informatique est ?</p>
+                        <input type="radio" name="question2" id="Q-2.1"> <span id="r4">CPU</span> <br>
+                        <input type="radio" name="question2" id="Q-2.2"> <span id="r5">Mémoire</span> <br>
+                        <input type="radio" name="question2" id="Q-2.3"> <span id="r6">Unité de contrôle</span> <br>
+                    </div>
+
+                <br>
+                    <div>
+                        <h2>Question 3 :</h2>
+                        <p id="q3"> Un programme qui convertit le langage assembleur en langage machine est appelé _______? </p>
+                        <input type="radio" name="question3" id="Q-3.1"> <span id="r7">Comparateur</span> <br>
+                        <input type="radio" name="question3" id="Q-3.2"> <span id="r8">Compilateur</span> <br>
+                        <input type="radio" name="question3" id="Q-3.3"> <span id="r9">Assembleur</span> <br>
+                    </div>
+
+                <br>
+                    <div>
+                        <h2>Question 4 :</h2>
+                        <p id="q4">Le système binaire utilise la base ______? </p>
+                        <input type="radio" name="question4" id="Q-4.1"> <span id="r10">2</span> <br>
+                        <input type="radio" name="question4" id="Q-4.2"> <span id="r11">10</span> <br>
+                        <input type="radio" name="question4" id="Q-4.3"> <span id="r12">8</span> <br>
+                    </div>
+
+                    <br>
+                    <div>
+                        <h2>Question 5 :</h2>
+                        <p id="q5">Laquelle des mémoires suivantes est non volatile ? </p>
+                        <input type="radio" name="question5" id="Q-5.1"> <span id="r13">SRAM</span> <br>
+                        <input type="radio" name="question5" id="Q-5.2"> <span id="r14">ROM</span> <br>
+                        <input type="radio" name="question5" id="Q-5.3"> <span id="r15">DRAM</span> <br>
+                    </div>
+
+                    <div class="pt-3">
+                            <button type="button" class="btn btn-info" id="btn_sub">Corriger</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div style="text-align: center;padding-top: 5%;padding-bottom: 5%;">
+                <h1 > Votre note obtenue  </h1>
+                <img src="Down_Arrow_Icon.png" style="width: 10rem;">
+                <div id="espace-score" class="h1 pt-3" ></div>
+            </div>
+
+</body>
+
+
+<script>
+    $(document).ready(function(){
+
+        $(function(){
+
+            var reponse_q1;
+            var reponse_q2;
+            var reponse_q3;
+            var reponse_q4;
+            var reponse_q5;
+
+            var score=0;
+
+            function q1_answer(){
+                var q1_1=$("input[name='question1']")[0];
+                var q1_2=$("input[name='question1']")[1];
+                var q1_3=$("input[name='question1']")[2];
+
+                if(q1_2.checked){
+                    $("#q1").css("color", "green");
+                    $("#r2").css("background-color", "green");
+                    score+=10;
+                    return true;
+                }
+                else if(q1_3.checked || q1_1.checked){
+                    $("#q1").css("color", "red");
+                        if(q1_3.checked ){
+                            $("#r3").css("background-color","red");
+                            $("#r2").css("background-color","green");
+                        }
+                        else{
+                            $("#r1").css("background-color","red");
+                            $("#r2").css("background-color","green");
+                        }
+                    return true;
+                }
+                else {
+                    $("#q1").css("color", "orange");
+                    return false;
+                }
+            };
+            
+            function q2_answer(){
+                var q2_1=$("input[name='question2']")[0];
+                var q2_2=$("input[name='question2']")[1];
+                var q2_3=$("input[name='question2']")[2];
+
+                if(q2_1.checked){
+                    $("#q2").css("color", "green");
+                    $("#r4").css("background-color", "green");
+                    score+=10;
+                    return true;
+                }
+                else if(q2_2.checked || q2_3.checked){
+                        $("#q2").css("color", "red");
+                            if(q2_2.checked ){
+                                $("#r5").css("background-color","red");
+                                $("#r4").css("background-color","green");
+                            }
+                            else{
+                                $("#r6").css("background-color","red");
+                                $("#r4").css("background-color","green");
+                            }
+                    return true;
+                }
+                else{
+                    $("#q2").css("color", "orange");
+                    return false;
+                }
+            };
+
+            function q3_answer(){
+                var q3_1=$("input[name='question3']")[0];
+                var q3_2=$("input[name='question3']")[1];
+                var q3_3=$("input[name='question3']")[2];
+
+                if(q3_3.checked){
+                    $("#q3").css("color", "green");
+                    $("#r9").css("background-color", "green");
+                    score+=10;
+                    return true;
+                }
+                else if(q3_2.checked || q3_1.checked){
+                        $("#q3").css("color", "red");
+                            if(q3_2.checked ){
+                                $("#r8").css("background-color","red");
+                                $("#r9").css("background-color","green");
+                            }
+                            else{
+                                $("#r7").css("background-color","red");
+                                $("#r9").css("background-color","green");
+                            }
+                    return true;
+                }
+                else{
+                    $("#q3").css("color", "orange");
+                    return false;
+                }
+            };
+
+            function q4_answer(){
+                var q4_1=$("input[name='question4']")[0];
+                var q4_2=$("input[name='question4']")[1];
+                var q4_3=$("input[name='question4']")[2];
+
+                if(q4_1.checked){
+                    $("#q4").css("color", "green");
+                    $("#r10").css("background-color", "green");
+                    score+=10;
+                    return true;
+                }
+                else if(q4_2.checked || q4_3.checked){
+                    $("#q4").css("color", "red");
+                            if(q4_2.checked ){
+                                $("#r11").css("background-color","red");
+                                $("#r10").css("background-color","green");
+                            }
+                            else{
+                                $("#r12").css("background-color","red");
+                                $("#r10").css("background-color","green");
+                            }
+                    return true;
+                }
+                else {
+                    $("#q4").css("color", "orange");
+                    return false;
+                }
+            };
+
+            function q5_answer(){
+                var q5_1=$("input[name='question5']")[0];
+                var q5_2=$("input[name='question5']")[1];
+                var q5_3=$("input[name='question5']")[2];
+
+                if(q5_2.checked){
+                    $("#q5").css("color", "green");
+                    $("#r14").css("background-color", "green");
+                    score+=10;
+                    return true;
+                    }
+                else if(q5_1.checked ||q5_3.checked){
+                        if(q5_1.checked ){
+                                    $("#r13").css("background-color","red");
+                                    $("#r14").css("background-color","green");
+                                }
+                                else{
+                                    $("#r15").css("background-color","red");
+                                    $("#r14").css("background-color","green");
+                                }
+                    return true;
+                }
+                else{
+                    $("#q5").css("color", "orange");
+                    return false;
+                }
+            };
+
+            $("#btn_sub").click(function(){
+                
+                var reponse_q1;
+                var reponse_q2;
+                var reponse_q3;
+                var reponse_q4;
+                var reponse_q5;
+
+                reponse_q1=q1_answer();
+                reponse_q2=q2_answer();
+                reponse_q3=q3_answer();
+                reponse_q4=q4_answer();
+                reponse_q5=q5_answer();
+
+                if((reponse_q1!==false) && (reponse_q2!==false) && (reponse_q3!==false) && (reponse_q4!==false) && (reponse_q5!==false)){
+                    
+                    $("#espace-score").html(score+"/50");
+                    
+                    return true;
+                }
+
+                else{
+                    alert("Faut répondre aux autre questions ! ");
+                    $("p").css("text-color", "orange")
+                    return false;
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+
+
+
+</html>
